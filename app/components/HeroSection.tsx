@@ -46,7 +46,7 @@ const HeroSection = () => {
         transition={{ duration: 1.5, repeat: Infinity }}
         className="absolute bottom-10 text-gray-500"
       >
-        <p>Scroll Down ⬇</p>
+        <p>↓</p>
       </motion.div>
     </section>
   );

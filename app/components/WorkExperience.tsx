@@ -5,7 +5,7 @@ const WorkExperience = () => {
   return (
     <section className="py-16 bg-gray-100 flex flex-col items-center px-6">
       {/* Title */}
-      <h2 className="text-4xl font-bold text-gray-900 mb-10">Recent work and experiments</h2>
+      <h2 className="text-4xl font-bold text-gray-900 mb-10">Experience</h2>
 
       {/* Apple Experience - Large Card */}
       <motion.div
