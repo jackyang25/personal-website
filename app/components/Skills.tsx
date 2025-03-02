@@ -39,18 +39,18 @@ const Skills = () => {
   return (
     <section className="bg-black text-white py-20 flex flex-col items-center">
       <div className="w-full max-w-4xl">
-        <h2 className="text-4xl font-bold mb-6">Languages</h2>
-        <div className="flex flex-wrap justify-center gap-6">
+        <h2 className="text-4xl font-bold mb-6" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+          Languages
+        </h2>
+        <div className="flex flex-wrap justify-center gap-10">
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center p-4 bg-gray-900 rounded-xl shadow-lg cursor-pointer"
+              className="flex flex-col items-center p-4 shadow-lg cursor-pointer transition-all duration-300 hover:scale-110"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.1, transition: { type: "spring", stiffness: 200, damping: 10 } }}
-              whileTap={{ scale: 1.05, transition: { type: "spring", stiffness: 200, damping: 10 } }}
             >
               {skill.icon}
               <p className="mt-2 text-lg font-semibold">{skill.name}</p>
@@ -58,18 +58,18 @@ const Skills = () => {
           ))}
         </div>
 
-        <h2 className="text-4xl font-bold mt-12 mb-6">Development Tools</h2>
-        <div className="flex flex-wrap justify-center gap-6">
+        <h2 className="text-4xl font-bold mt-12 mb-6" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+          Development Tools
+        </h2>
+        <div className="flex flex-wrap justify-center gap-10">
           {tools.map((tool, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center p-4 bg-gray-900 rounded-xl shadow-lg cursor-pointer"
+              className="flex flex-col items-center p-4 shadow-lg cursor-pointer transition-all duration-300 hover:scale-110"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.1, transition: { type: "spring", stiffness: 200, damping: 10 } }}
-              whileTap={{ scale: 1.05, transition: { type: "spring", stiffness: 200, damping: 10 } }}
             >
               {tool.icon}
               <p className="mt-2 text-lg font-semibold">{tool.name}</p>

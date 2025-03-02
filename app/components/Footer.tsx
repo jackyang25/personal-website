@@ -42,14 +42,14 @@ const FooterSection = () => {
           >
             GitHub
           </a>
-          <a
+          {/* <a
             href="https://leetcode.com/u/wigglyworm123/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition"
           >
             LeetCode
-          </a>
+          </a> */}
           <a
             href="https://www.instagram.com/flyingraccoon123/"
             target="_blank"

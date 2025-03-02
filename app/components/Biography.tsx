@@ -11,7 +11,7 @@ const Biography = () => {
   const terminalCommand = "jack@about:~$ ./bio.sh";
 
   const bioParagraphs = [
-    ">>> <span class='text-white'>Hey, welcome to my profile.</span>\n  <span class='text-white'>I was born in Manhattan, New York City, and I enjoy photography, traveling to new places, and meeting new people.</span>\n",
+    ">>> <span class='text-white'>Hey, welcome to my profile.</span>\n  <span class='text-white'>I attend New York University (Class of 2025), and I was born in Manhattan, New York City, and I enjoy photography, traveling to new places, and meeting new people.</span>\n",
     ">>> <span class='text-white'>I'm currently studying <span class='text-cyan-400'>Computer Science</span>, with career interests in <span class='text-purple-400'>software engineering, fintech, data analytics, and machine learning</span>.</span>\n  <span class='text-white'>I'm always learning more about the financial landscape, and I'm eager to explore the future of <span class='text-orange-400'>blockchain, AI, and digital transformation</span>.</span>\n",
     ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>\n  <span class='text-white'>I've also gained hands-on experience through two internships and two research positions, where I helped to build technology-driven solutions.</span>\n"
   ];
@@ -135,6 +135,7 @@ const Biography = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="text-xl"
+          style={{ fontFamily: "'IBM Plex Mono', monospace" }} // ✅ Only this text has IBM Plex Mono
         >
           Interact with the Tesseract
         </motion.p>
