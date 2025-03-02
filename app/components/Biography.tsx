@@ -1,98 +1,146 @@
 "use client";
 import { motion } from "framer-motion";
-import { FaBriefcase } from "react-icons/fa"; // Job icon
+import { useState, useEffect } from "react";
 
-const experiences = [
-  {
-    title: "Software Engineer - Internship",
-    company: "Angi",
-    date: "Jun 2024 – Aug 2024",
-    description: "Developed full-stack systems and implemented APIs to help integrate the content management system.",
-  },
-  {
-    title: "Research Assistant",
-    company: "New York University Abu Dhabi",
-    date: "Aug 2023 - Jan 2024",
-    description: "Conducted research in NLP and LSTM networks, automating regression and classification tasks.",
-  },
-  {
-    title: "Software Engineer - Internship",
-    company: "Dotdash Meredith",
-    date: "Jun 2023 - Aug 2023",
-    description: "Optimized UX for 200M annual visitors and derived business insights using autoencoders and Neo4j.",
-  },
-  {
-    title: "Fellow - Philanthropy",
-    company: "IAC",
-    date: "Jun 2023 - Aug 2023",
-    description: "Secured $35,000 in funding for NPOs by developing a strategic grant proposal and pitch deck.",
-  },
-  {
-    title: "Team Lead",
-    company: "Flexible AI-Enabled Mechatronic Systems Lab (FAMS)",
-    date: "Jul 2022 - Jun 2023",
-    description: "Led a team in integrating OpenCV, CUDA, and NVIDIA Jetson to develop computer vision models for robotic movement.",
-  },
-];
+const Biography = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [commandText, setCommandText] = useState("");
+  const [outputLines, setOutputLines] = useState<string[]>([]);
+  const [showCursor, setShowCursor] = useState(true);
 
-const Timeline = () => {
+  const terminalCommand = "jack@about:~$ ./bio.sh";
+
+  const bioParagraphs = [
+    ">>> <span class='text-white'>Hey, welcome to my profile.</span>\n  <span class='text-white'>I was born in Manhattan, New York City, and I enjoy photography, traveling to new places, and meeting new people.</span>\n",
+    ">>> <span class='text-white'>I'm currently studying <span class='text-cyan-400'>Computer Science</span>, with career interests in <span class='text-purple-400'>software engineering, fintech, data analytics, and machine learning</span>.</span>\n  <span class='text-white'>I'm always learning more about the financial landscape, and I'm eager to explore the future of <span class='text-orange-400'>blockchain, AI, and digital transformation</span>.</span>\n",
+    ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>\n  <span class='text-white'>I've also gained hands-on experience through two internships and two research positions, where I helped to build technology-driven solutions.</span>\n"
+  ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const section = document.querySelector(".biography-section");
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || commandText.length > 0) return;
+
+    let i = 0;
+    const typeCommand = () => {
+      setCommandText((prev) => terminalCommand.slice(0, i + 1));
+      i++;
+
+      if (i < terminalCommand.length) {
+        setTimeout(typeCommand, 50);
+      } else {
+        setTimeout(() => simulateLoading(), 500);
+      }
+    };
+
+    typeCommand();
+  }, [isVisible]);
+
+  const simulateLoading = () => {
+    const loadingStages = [
+      "<span class='text-white'>[          ] 0%</span>",
+      "<span class='text-white'>[###       ] 30%</span>",
+      "<span class='text-white'>[#####     ] 50%</span>",
+      "<span class='text-white'>[#######   ] 70%</span>",
+      "<span class='text-white'>[##########] 100%</span>"
+    ];
+
+    let index = 0;
+    const loadingInterval = setInterval(() => {
+      setOutputLines([loadingStages[index]]);
+      index++;
+
+      if (index === loadingStages.length) {
+        clearInterval(loadingInterval);
+        setTimeout(() => displayBioParagraphs(), 1000);
+      }
+    }, 400);
+  };
+
+  const displayBioParagraphs = () => {
+    let index = 0;
+    const bioInterval = setInterval(() => {
+      setOutputLines((prev) => [...prev, bioParagraphs[index]]);
+      index++;
+
+      if (index === bioParagraphs.length) {
+        clearInterval(bioInterval);
+        setShowCursor(false);
+      }
+    }, 1000);
+  };
+
   return (
-    <section className="py-2 bg-black text-white flex flex-col items-center px-6">
-      <h2 className="text-4xl font-bold text-white mb-10">Experience</h2>
+    <section className="biography-section relative h-screen flex flex-col justify-center items-center text-left px-6 pb-32">
+      
+      {/* Background gradient to blend with the page */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-100 via-gray-200 to-black"></div>
 
-      <div className="relative w-full max-w-4xl">
-        {/* Timeline Line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-500 h-full"></div>
+      {/* Terminal Window - Positioned to Always Stay on Top */}
+      <div className="relative z-20 max-w-3xl w-full bg-gray-900 bg-opacity-90 rounded-lg shadow-lg border border-gray-700">
+        
+        {/* Terminal Header */}
+        <div className="flex items-center px-4 py-2 bg-gray-800 border-b border-gray-700 text-gray-400 text-xs">
+          <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+          <span className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
+          <span className="w-3 h-3 bg-green-500 rounded-full mr-3"></span>
+          <p className="font-mono text-blue-400">jack@about:~$</p>
+        </div>
 
-        {experiences.map((exp, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="relative flex w-full items-center mb-6"
-          >
-            {/* Left Side */}
-            {index % 2 === 0 ? (
-              <>
-                <div className="w-1/2 flex justify-end pr-6">
-                  <motion.div className="bg-gray-900 p-5 rounded-2xl shadow-lg w-[420px] transition-all duration-300">
-                    <h3 className="text-xl font-bold">{exp.company}</h3>
-                    <p className="text-gray-400">{exp.date}</p>
-                    <p className="font-semibold mt-2">{exp.title}</p>
-                    <p className="text-gray-300 mt-2">{exp.description}</p>
-                  </motion.div>
-                </div>
-                {/* Timeline Icon */}
-                <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
-                  <FaBriefcase className="text-white text-sm" />
-                </div>
-                <div className="w-1/2"></div>
-              </>
-            ) : (
-              /* Right Side */
-              <>
-                <div className="w-1/2"></div>
-                {/* Timeline Icon */}
-                <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
-                  <FaBriefcase className="text-white text-sm" />
-                </div>
-                <div className="w-1/2 flex justify-start pl-8">
-                  <motion.div className="bg-gray-900 p-5 rounded-2xl shadow-lg w-[420px] transition-all duration-300">
-                    <h3 className="text-xl font-bold">{exp.company}</h3>
-                    <p className="text-gray-400">{exp.date}</p>
-                    <p className="font-semibold mt-2">{exp.title}</p>
-                    <p className="text-gray-300 mt-2">{exp.description}</p>
-                  </motion.div>
-                </div>
-              </>
-            )}
-          </motion.div>
-        ))}
+        {/* Terminal Content */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isVisible ? 1 : 0 }}
+          transition={{ duration: 1 }}
+          className="p-4 text-white text-sm leading-relaxed whitespace-pre-line"
+          style={{ 
+            fontFamily: '"Fira Code", "Source Code Pro", Menlo, Consolas, "Courier New", monospace',
+            position: "relative",
+            zIndex: 30, // Keeps terminal content above the background
+          }}
+        >
+          <span className="text-blue-400">{commandText}</span>
+          {showCursor && <span className="ml-1">█</span>} 
+          <br />
+          {outputLines.map((line, idx) => (
+            <div key={idx} className="mb-3">
+              <span dangerouslySetInnerHTML={{ __html: line }} />
+            </div>
+          ))}
+        </motion.div>
       </div>
+
+      {/* Scroll Down Arrow */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 1 }}
+        className="absolute bottom-10 text-gray-500"
+      >
+        <motion.p
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="text-xl"
+        >
+          Interact with the Tesseract
+        </motion.p>
+      </motion.div>
     </section>
   );
 };
 
-export default Timeline;
+export default Biography;

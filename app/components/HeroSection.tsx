@@ -74,14 +74,12 @@ const HeroSection = () => {
   return (
     <section
       ref={ref}
-      className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-gray-100 to-gray-200 relative overflow-hidden px-4"
+      className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-white to-gray-100 relative overflow-hidden px-4"
     >
-      {/* Typing Effect (Cursor is Now Fixed) */}
       <motion.div style={{ opacity }} className="w-full flex justify-center mb-6">
         <TypingEffect />
       </motion.div>
 
-      {/* Name */}
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -91,17 +89,15 @@ const HeroSection = () => {
         Jack Yang
       </motion.h1>
 
-      {/* Subtitle / Description */}
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
         className="text-lg text-gray-600 max-w-xl mt-3"
       >
-        Designer • Developer • Human
+        Student • Developer • New York
       </motion.p>
 
-      {/* Scroll Down Indicator */}
       <motion.div
         style={{ opacity: scrollTextOpacity }}
         animate={{ y: [0, 10, 0] }}
@@ -110,13 +106,6 @@ const HeroSection = () => {
       >
         <p className="text-xl">↓</p>
       </motion.div>
-
-      {/* Floating Particles for Subtle Depth */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-40 top-10 left-20" />
-        <div className="absolute w-3 h-3 bg-gray-500 rounded-full opacity-30 top-40 right-20" />
-        <div className="absolute w-2 h-2 bg-gray-400 rounded-full opacity-30 bottom-20 left-10" />
-      </div>
     </section>
   );
 };

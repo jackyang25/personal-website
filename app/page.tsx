@@ -3,14 +3,17 @@ import Tesseract from "@/app/components/Tesseract";
 import WorkExperience from "@/app/components/WorkExperience";
 import Mesh from "@/app/components/Mesh";
 import Biography from "@/app/components/Biography";
+import Footer from "@/app/components/Footer";
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
-      <Tesseract />
       <Biography />
+      <Tesseract />
+      <WorkExperience />
       <Mesh />
+      <Footer />
     </main>
   );
 }

@@ -9,12 +9,12 @@ const MeshGrid = () => {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartRef = useRef({ x: 0, y: 0 });
   const rotationRef = useRef({ x: 0, y: 0 });
-  const velocityRef = useRef({ x: 0.001, y: 0.001 }); // Reduced inertia
+  const velocityRef = useRef({ x: 0.001, y: 0.001 });
 
   // Water ripple effect parameters
-  const rippleStrength = 0.03; // Strength of the ripple | previous 5 or .03
-  const waveSpeed = 0.2; // Speed of wave movement
-  const waveFrequency = 2; // Frequency of the wave oscillation | previous 2
+  const rippleStrength = 0.03;
+  const waveSpeed = 0.2;
+  const waveFrequency = 5;
 
   // Handle click & drag rotation
   useEffect(() => {
@@ -35,12 +35,10 @@ const MeshGrid = () => {
         const deltaX = (event.clientX - dragStartRef.current.x) * 0.005;
         const deltaY = (event.clientY - dragStartRef.current.y) * 0.005;
 
-        // Apply rotation relative to its current state
         meshRef.current.rotation.x = rotationRef.current.x + deltaY;
         meshRef.current.rotation.y = rotationRef.current.y + deltaX;
 
-        // Store the velocity for inertia after dragging
-        velocityRef.current = { x: deltaY * 0.05, y: deltaX * 0.05 }; // Less inertia
+        velocityRef.current = { x: deltaY * 0.05, y: deltaX * 0.05 };
       }
     };
 
@@ -60,11 +58,9 @@ const MeshGrid = () => {
   useFrame(() => {
     if (meshRef.current) {
       if (!isDragging) {
-        // Continuous auto-rotation + reduced inertia effect after drag
         meshRef.current.rotation.x += velocityRef.current.x;
         meshRef.current.rotation.y += velocityRef.current.y;
 
-        // **Reduce inertia more quickly**
         velocityRef.current.x = THREE.MathUtils.lerp(velocityRef.current.x, 0.001, 0.1);
         velocityRef.current.y = THREE.MathUtils.lerp(velocityRef.current.y, 0.001, 0.1);
       }
@@ -72,11 +68,8 @@ const MeshGrid = () => {
       // Water ripple effect
       const geometry = meshRef.current.geometry;
       const position = geometry.attributes.position;
-      
-      // Update wave animation over time
       const time = performance.now() * waveSpeed;
 
-      // Apply a wavy effect using a sine function to displace the vertices
       for (let i = 0; i < position.count; i++) {
         const vertex = new THREE.Vector3(
           position.getX(i),
@@ -84,10 +77,7 @@ const MeshGrid = () => {
           position.getZ(i)
         );
 
-        // Create a ripple effect by applying a sine wave to the Y position of each vertex
         const wave = Math.sin(vertex.x * waveFrequency + time) * rippleStrength;
-
-        // Apply the effect to the Y axis of the vertices
         position.setY(i, vertex.y + wave);
       }
 
@@ -117,10 +107,25 @@ const MeshGrid = () => {
 
 const Scroll3D = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
+
+  // Observer to detect visibility changes
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting); // Set visibility dynamically
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   // Subtle scroll transformations
   const scrollRotation = useTransform(scrollYProgress, [0, 1], [0, Math.PI * 2]);
@@ -132,11 +137,13 @@ const Scroll3D = () => {
       className="h-screen bg-black flex items-center justify-center"
       style={{ rotateY: scrollRotation, scale: scrollScale }}
     >
-      <Canvas>
-        <ambientLight intensity={0.3} />
-        <pointLight position={[3, 3, 3]} intensity={2} />
-        <MeshGrid />
-      </Canvas>
+      {isVisible ? (
+        <Canvas>
+          <ambientLight intensity={0.3} />
+          <pointLight position={[3, 3, 3]} intensity={2} />
+          <MeshGrid />
+        </Canvas>
+      ) : null}
     </motion.section>
   );
 };

@@ -157,13 +157,28 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
 };
 
 const Scroll3D = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0.2 });
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="h-screen bg-black flex items-center justify-center">
-      <Canvas>
-        <ambientLight intensity={0.2} />
-        <pointLight position={[5, 5, 5]} intensity={1.5} />
-        <Tesseract isVisible={true} />
-      </Canvas>
+    <section ref={ref} className="h-screen bg-black flex items-center justify-center">
+      {isVisible && (
+        <Canvas>
+          <ambientLight intensity={0.2} />
+          <pointLight position={[5, 5, 5]} intensity={1.5} />
+          <Tesseract isVisible={isVisible} />
+        </Canvas>
+      )}
     </section>
   );
 };
