@@ -51,7 +51,7 @@ const FooterSection = () => {
             LeetCode
           </a>
           <a
-            href="https://www.instagram.com/flyingracoon123/"
+            href="https://www.instagram.com/flyingraccoon123/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition"

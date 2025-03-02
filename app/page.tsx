@@ -4,7 +4,7 @@ import WorkExperience from "@/app/components/WorkExperience";
 import Mesh from "@/app/components/Mesh";
 import Biography from "@/app/components/Biography";
 import Footer from "@/app/components/Footer";
-
+import Skills from "@/app/components/Skills";
 export default function Home() {
   return (
     <main>
@@ -12,6 +12,7 @@ export default function Home() {
       <Biography />
       <Tesseract />
       <WorkExperience />
+      <Skills />
       <Mesh />
       <Footer />
     </main>
