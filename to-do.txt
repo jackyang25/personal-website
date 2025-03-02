@@ -1,0 +1,3 @@
+- Oscillator for tesseract 
+- Glowding shade effect for tesseract 
+- Add resume 

@@ -12,16 +12,16 @@ interface Ball {
   fading: boolean;
 }
 
-const Tesseract = () => {
+const MAX_BALLS = 100;
+
+const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   const groupRef = useRef<THREE.Group>(null);
   const [balls, setBalls] = useState<Ball[]>(() => [createNewBall()]);
+  const clickCooldown = useRef(false);
 
-  const clickCooldown = useRef(false); // Prevents excessive clicks
-
-  // Function to create a new ball with a truly unique ID
   function createNewBall(): Ball {
     return {
-      id: Date.now() + Math.random(), // Ensure uniqueness
+      id: Date.now() + Math.random(),
       position: new THREE.Vector3(
         (Math.random() - 0.5) * 1.2,
         (Math.random() - 0.5) * 1.2,
@@ -32,28 +32,34 @@ const Tesseract = () => {
         (Math.random() - 0.5) * 0.02,
         (Math.random() - 0.5) * 0.02
       ),
-      scale: 0, // Start small for pop-in effect
+      scale: 0,
       fading: false,
     };
   }
 
-  // Function to add between 1 to 4 new balls per click
   const addBalls = useCallback(() => {
-    if (clickCooldown.current) return; // Prevent spam clicks
+    if (clickCooldown.current) return;
     clickCooldown.current = true;
 
-    const numBallsToAdd = Math.floor(Math.random() * 4) + 1; // Random 1-4
-    setBalls((prevBalls) => [
-      ...prevBalls,
-      ...Array.from({ length: numBallsToAdd }, () => createNewBall()),
-    ]);
+    const numBallsToAdd = Math.floor(Math.random() * 4) + 1;
+    setBalls((prevBalls) => {
+      let newBalls = [...prevBalls, ...Array.from({ length: numBallsToAdd }, () => createNewBall())];
+
+      if (newBalls.length > MAX_BALLS) {
+        newBalls = newBalls.slice(newBalls.length - MAX_BALLS);
+      }
+
+      return newBalls;
+    });
 
     setTimeout(() => {
-      clickCooldown.current = false; // Reset cooldown after a short delay
+      clickCooldown.current = false;
     }, 200);
   }, []);
 
   useFrame(({ clock }) => {
+    if (!isVisible) return; // Pause animation if not visible
+
     if (groupRef.current) {
       const t = clock.getElapsedTime() * 0.6;
       groupRef.current.rotation.x = Math.sin(t) * 1.2;
@@ -77,8 +83,9 @@ const Tesseract = () => {
     );
   });
 
-  // Remove 1 ball every second (but always keep at least 1 inside)
   useEffect(() => {
+    if (!isVisible) return; // Don't run if not visible
+
     const interval = setInterval(() => {
       setBalls((prevBalls) => {
         if (prevBalls.length > 1) {
@@ -95,7 +102,7 @@ const Tesseract = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isVisible]);
 
   // === TRUE 4D TESSERACT PROJECTION ===
   const vertices = useMemo(() => {
@@ -126,25 +133,15 @@ const Tesseract = () => {
 
   return (
     <group ref={groupRef} onClick={addBalls}>
-      {/* Wireframe Edges */}
       {edges.map(([start, end], index) => {
         const geometry = new THREE.BufferGeometry().setFromPoints([vertices[start], vertices[end]]);
         return (
-          <line key={index} geometry={geometry}>
-            <lineBasicMaterial attach="material" color="cyan" linewidth={1.5} />
-          </line>
+          <primitive key={index} object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: "cyan" }))} />
         );
       })}
-
-      {/* Glowing Core Spheres (bouncing inside, disappearing when needed) */}
       {balls.map((ball) => (
         <Sphere key={ball.id} position={ball.position} args={[0.15, 32, 32]} scale={ball.scale}>
-          <meshStandardMaterial
-            emissive="cyan"
-            emissiveIntensity={2}
-            roughness={0.2}
-            metalness={0.8}
-          />
+          <meshStandardMaterial emissive="cyan" emissiveIntensity={2} roughness={0.2} metalness={0.8} />
         </Sphere>
       ))}
     </group>
@@ -152,12 +149,25 @@ const Tesseract = () => {
 };
 
 const Scroll3D = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="h-screen bg-black flex items-center justify-center">
+    <section ref={ref} className="h-screen bg-black flex items-center justify-center">
       <Canvas>
         <ambientLight intensity={0.2} />
         <pointLight position={[5, 5, 5]} intensity={1.5} />
-        <Tesseract />
+        <Tesseract isVisible={isVisible} />
       </Canvas>
     </section>
   );

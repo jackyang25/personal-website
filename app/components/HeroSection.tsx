@@ -36,7 +36,7 @@ const HeroSection = () => {
         Jack Yang
       </motion.h1>
       <motion.p style={{ y: yText, opacity }} className="text-lg text-gray-700 max-w-lg mt-2">
-        I’m a software engineer passionate about creating innovative solutions.
+        Digital Profile
       </motion.p>
 
       {/* Scroll Down Indicator - Now Fades Out */}
