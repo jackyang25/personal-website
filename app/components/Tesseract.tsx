@@ -136,7 +136,15 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
       {edges.map(([start, end], index) => {
         const geometry = new THREE.BufferGeometry().setFromPoints([vertices[start], vertices[end]]);
         return (
-          <primitive key={index} object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: "cyan" }))} />
+          <primitive 
+            key={index} 
+            object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ 
+              color: "cyan", 
+              linewidth: 2, 
+              opacity: .9, 
+              transparent: true 
+            }))} 
+          />
         );
       })}
       {balls.map((ball) => (
@@ -149,25 +157,12 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
 };
 
 const Scroll3D = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={ref} className="h-screen bg-black flex items-center justify-center">
+    <section className="h-screen bg-black flex items-center justify-center">
       <Canvas>
         <ambientLight intensity={0.2} />
         <pointLight position={[5, 5, 5]} intensity={1.5} />
-        <Tesseract isVisible={isVisible} />
+        <Tesseract isVisible={true} />
       </Canvas>
     </section>
   );

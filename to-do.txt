@@ -1,3 +1,4 @@
 - Oscillator for tesseract 
 - Glowding shade effect for tesseract 
 - Add resume 
+- Change background image to custom image (abstract waves)

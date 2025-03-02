@@ -12,9 +12,9 @@ const MeshGrid = () => {
   const velocityRef = useRef({ x: 0.001, y: 0.001 }); // Reduced inertia
 
   // Water ripple effect parameters
-  const rippleStrength = 0.03; // Strength of the ripple
+  const rippleStrength = 0.03; // Strength of the ripple | previous 5 or .03
   const waveSpeed = 0.2; // Speed of wave movement
-  const waveFrequency = 2; // Frequency of the wave oscillation
+  const waveFrequency = 2; // Frequency of the wave oscillation | previous 2
 
   // Handle click & drag rotation
   useEffect(() => {
