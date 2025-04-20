@@ -6,9 +6,12 @@ import Biography from "@/app/components/Biography";
 import Footer from "@/app/components/Footer";
 import Skills from "@/app/components/Skills";
 import Education from "@/app/components/Education";
+import AnimationCursor from "@/app/components/animation-cursor";
+
 export default function Home() {
   return (
     <main>
+      <AnimationCursor />
       <HeroSection />
       <Biography />
       <Tesseract />

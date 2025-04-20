@@ -19,7 +19,7 @@ const skills = [
   { name: "GraphQL", icon: <SiGraphql className="text-pink-500 text-5xl" /> },
   { name: "HTML", icon: <SiHtml5 className="text-orange-500 text-5xl" /> },
   { name: "CSS", icon: <SiCss3 className="text-blue-500 text-5xl" /> },
-  { name: "Shell", icon: <SiGnubash className="text-green-500 text-5xl" /> },
+  { name: "Linux", icon: <SiGnubash className="text-green-500 text-5xl" /> },
 ];
 
 const tools = [

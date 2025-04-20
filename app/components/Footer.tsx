@@ -67,7 +67,7 @@ const FooterSection = () => {
         transition={{ delay: 0.3, duration: 0.6 }}
         className="text-gray-500 text-sm mt-6"
       >
-        © {new Date().getFullYear()} Big Money Capital. All Rights Reserved.
+        © {new Date().getFullYear()} Big Money Capital LLC · All Rights Reserved.
       </motion.p>
     </footer>
   );

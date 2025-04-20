@@ -95,7 +95,7 @@ const HeroSection = () => {
         transition={{ delay: 0.5, duration: 0.6 }}
         className="text-lg text-gray-600 max-w-xl mt-3"
       >
-        Student • Developer • New York
+        Student • Technology • New York
       </motion.p>
 
       <motion.div

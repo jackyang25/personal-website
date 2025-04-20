@@ -11,8 +11,8 @@ const Biography = () => {
   const terminalCommand = "jack@about:~$ ./bio.sh";
 
   const bioParagraphs = [
-    ">>> <span class='text-white'>Hey, welcome to my profile.</span>\n  <span class='text-white'>I'm a senior at New York University and I was raised in Manhattan, NYC. I enjoy photography, traveling, and meeting new people.</span>\n",
-    ">>> <span class='text-white'>I'm currently studying <span class='text-cyan-400'>Computer Science</span>, with career interests in <span class='text-purple-400'>software engineering, fintech, data analytics, and machine learning</span>.</span>\n  <span class='text-white'>I'm always learning more about the financial landscape, and I'm excited to explore the future of <span class='text-orange-400'>blockchain, AI, and digital transformation</span>.</span>\n",
+    ">>> <span class='text-white'>Hey, welcome to my profile.</span>\n  <span class='text-white'>I'm a senior at New York University and I was raised in Manhattan, NYC. I enjoy working out, traveling, and meeting new people.</span>\n",
+    ">>> <span class='text-white'>I'm currently studying <span class='text-cyan-400'>Computer Science</span>, with career interests in <span class='text-purple-400'>software engineering, fintech, data analytics, and machine learning</span>.</span>\n  <span class='text-white'>I'm always learning more about the financial landscape, and I'm excited to explore the future of <span class='text-orange-400'>blockchain, agentic AI, and emerging tech</span>.</span>\n",
     ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>\n  <span class='text-white'>I've also gained hands-on experience through two internships and two research positions, where I helped to build technology-driven solutions.</span>\n"
   ];
 
@@ -106,11 +106,11 @@ const Biography = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: isVisible ? 1 : 0 }}
           transition={{ duration: 1 }}
-          className="p-4 text-white text-sm leading-relaxed whitespace-pre-line"
+          className="p-4 text-white text-sm leading-relaxed whitespace-pre-line overflow-y-auto h-100"
           style={{ 
             fontFamily: '"Fira Code", "Source Code Pro", Menlo, Consolas, "Courier New", monospace',
             position: "relative",
-            zIndex: 30, // Keeps terminal content above the background
+            zIndex: 30,
           }}
         >
           <span className="text-blue-400">{commandText}</span>
@@ -135,7 +135,7 @@ const Biography = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="text-xl"
-          style={{ fontFamily: "'IBM Plex Mono', monospace" }} // ✅ Only this text has IBM Plex Mono
+          style={{ fontFamily: "'IBM Plex Mono', monospace" }}
         >
           Interact with the Tesseract
         </motion.p>
