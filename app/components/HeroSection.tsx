@@ -20,31 +20,26 @@ const TypingEffect = () => {
     let typingSpeed = 100;
 
     if (step === 0) {
-      // Typing the message
       if (index < messages[messageIndex].length) {
         setTimeout(() => {
           setDisplayedText(messages[messageIndex].slice(0, index + 1));
           setIndex(index + 1);
         }, typingSpeed);
       } else {
-        // Pause before deleting text
         setTimeout(() => setStep(1), 2000);
       }
     } else if (step === 1) {
-      // Backspacing the text
       if (index > 0) {
         setTimeout(() => {
           setDisplayedText(messages[messageIndex].slice(0, index - 1));
           setIndex(index - 1);
         }, 50);
       } else {
-        // Move to next message
         setMessageIndex((prev) => (prev + 1) % messages.length);
         setStep(0);
       }
     }
 
-    // Cursor blinking effect
     const cursorBlink = setInterval(() => {
       setShowCursor((prev) => !prev);
     }, 500);
@@ -105,18 +100,29 @@ const HeroSection = () => {
       </motion.p>
 
       {/* Button Group */}
-      <div className="absolute bottom-24 px-4 w-full flex flex-col md:flex-row md:gap-4 gap-y-3 items-center justify-center">
-        <button className="w-14 h-14 md:w-auto md:px-6 py-3 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md">
-          <FileText size={24} />
-        </button>
+      <div className="absolute bottom-24 px-4 w-full flex flex-row gap-6 items-center justify-center">
+        <a
+          href="#"
+          className="w-16 h-16 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md"
+        >
+          <FileText size={32} />
+        </a>
 
-        <button className="w-14 h-14 md:w-auto md:px-6 py-3 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md">
-          <Mail size={24} />
-        </button>
+        <a
+          href="mailto:jy3784@nyu.edu"
+          className="w-16 h-16 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md"
+        >
+          <Mail size={32} />
+        </a>
 
-        <button className="w-14 h-14 md:w-auto md:px-6 py-3 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md">
-          <Github size={24} />
-        </button>
+        <a
+          href="https://github.com/jackyang25"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-16 h-16 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md"
+        >
+          <Github size={32} />
+        </a>
       </div>
 
       <motion.div
