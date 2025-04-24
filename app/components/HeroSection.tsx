@@ -1,6 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { ChevronRight, FileText, Mail, Github } from "lucide-react";
 
 const TypingEffect = () => {
   const messages = [
@@ -55,7 +56,9 @@ const TypingEffect = () => {
     <div className="w-full flex justify-center">
       <p className="text-2xl md:text-3xl lg:text-4xl text-gray-800 font-mono text-center inline-flex">
         {displayedText}
-        <span className={`ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>|</span>
+        <span className={`ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>
+          |
+        </span>
       </p>
     </div>
   );
@@ -76,7 +79,10 @@ const HeroSection = () => {
       ref={ref}
       className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-white to-gray-100 relative overflow-hidden px-4"
     >
-      <motion.div style={{ opacity }} className="w-full flex justify-center mb-6">
+      <motion.div
+        style={{ opacity }}
+        className="w-full flex justify-center mb-6"
+      >
         <TypingEffect />
       </motion.div>
 
@@ -95,14 +101,29 @@ const HeroSection = () => {
         transition={{ delay: 0.5, duration: 0.6 }}
         className="text-lg text-gray-600 max-w-xl mt-3"
       >
-        Student • Technology • New York
+        Student • Developer • New York
       </motion.p>
+
+      {/* Button Group */}
+      <div className="absolute bottom-24 px-4 w-full flex flex-col md:flex-row md:gap-4 gap-y-3 items-center justify-center">
+        <button className="w-14 h-14 md:w-auto md:px-6 py-3 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md">
+          <FileText size={24} />
+        </button>
+
+        <button className="w-14 h-14 md:w-auto md:px-6 py-3 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md">
+          <Mail size={24} />
+        </button>
+
+        <button className="w-14 h-14 md:w-auto md:px-6 py-3 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md">
+          <Github size={24} />
+        </button>
+      </div>
 
       <motion.div
         style={{ opacity: scrollTextOpacity }}
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        className="absolute bottom-10 text-gray-500"
+        className="absolute bottom-6 text-gray-500"
       >
         <p className="text-xl">↓</p>
       </motion.div>
