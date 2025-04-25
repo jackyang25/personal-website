@@ -11,9 +11,9 @@ const Biography = () => {
   const terminalCommand = "jack@about:~$ ./bio.sh";
 
   const bioParagraphs = [
-    ">>> <span class='text-white'>Hey, welcome to my profile.</span>\n  <span class='text-white'>I'm a senior at New York University and I was raised in Manhattan, NYC. I enjoy working out, traveling, and meeting new people.</span>\n",
-    ">>> <span class='text-white'>I'm currently studying <span class='text-cyan-400'>Computer Science</span>, with career interests in <span class='text-purple-400'>software engineering, fintech, data analytics, and machine learning</span>.</span>\n  <span class='text-white'>I'm always learning more about the financial landscape, and I'm excited to explore the future of <span class='text-orange-400'>blockchain, agentic AI, and emerging tech</span>.</span>\n",
-    ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>\n  <span class='text-white'>I've also gained hands-on experience through two internships and two research positions, where I helped to build technology-driven solutions.</span>\n"
+    ">>> <span class='text-white'>Hey 👋, welcome to my profile.</span>\n  <span class='text-white'>I'm a senior at New York University and I was raised in Manhattan, NYC. I enjoy working out, traveling, and meeting new people.</span>\n",
+    ">>> <span class='text-white'>I'm currently studying <span class='text-cyan-400'>Computer Science</span>, with career interests in <span class='text-purple-400'>software engineering, fintech, data analytics, and machine learning</span>.</span>\n  <span class='text-white'>I'm always eager to learn, and I'm excited to explore the future of <span class='text-orange-400'>blockchain, agentic AI, and other emerging tech</span>.</span>\n",
+    ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>\n  <span class='text-white'>I've also gained hands-on experience through two internships and two research assistant positions, where I helped to build technology-driven solutions.</span>\n"
   ];
 
   useEffect(() => {
