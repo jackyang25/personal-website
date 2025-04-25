@@ -4,40 +4,57 @@ import Image from "next/image";
 
 const experiences = [
   {
+    title: "Software Engineer",
+    company: "Pulp",
+    date: "Apr 2025 – Present",
+    logo: "/logos/pulp.svg",
+    description:
+      "Currently working on full-stack development projects for agentic AI startup.",
+  },
+  {
     title: "Software Engineering Intern",
     company: "Angi",
     date: "Jun 2024 – Aug 2024",
     logo: "/logos/angi.png",
+    description:
+      "Worked on internal backend and frontend services, improving performance and building new APIs.",
   },
   {
     title: "Research Assistant",
     company: "New York University Abu Dhabi",
     date: "Aug 2023 - Jan 2024",
     logo: "/logos/nyu.png",
+    description:
+      "Conducted research in natural language processing, focusing on classification tasks.",
   },
   {
     title: "Software Engineering Intern",
     company: "Dotdash Meredith",
     date: "Jun 2023 - Aug 2023",
     logo: "/logos/ddm.png",
+    description:
+      "Built core web components for content articles and optimized user experience.",
   },
   {
     title: "Fellow",
     company: "IAC",
     date: "Jun 2023 - Aug 2023",
     logo: "/logos/iacwhite.png",
+    description:
+      "Selected for a prestigious fellowship program; collaborated with multiple IAC brands.",
   },
   {
     title: "Team Lead",
     company: "NYU Flexible AI-Enabled Mechatronic Systems Lab",
     date: "Jul 2022 - Jun 2023",
     logo: "/logos/fam.png",
+    description: "Led a team to develop AI-enabled robotic systems.",
   },
 ];
 
 const Timeline = () => {
   return (
-    <section className="py-24 bg-black text-white flex flex-col items-center px-6">
+    <section className="relative overflow-hidden py-24 bg-black text-white flex flex-col items-center px-6">
       <motion.h2
         className="text-5xl mb-16 tracking-tight text-white text-center"
         style={{ fontFamily: "'Playfair Display', serif" }}
@@ -67,15 +84,30 @@ const Timeline = () => {
                 {/* Left Side */}
                 <div className="w-1/2 flex justify-end pr-8">
                   <div className="p-2 w-fit max-w-sm text-right transition-transform hover:-translate-y-2 duration-300">
-                    <h3 className="text-lg font-medium text-white/90">{exp.company}</h3>
+                    <h3 className="text-lg font-medium text-white/90">
+                      {exp.company}
+                    </h3>
                     <p className="text-sm text-white/60">{exp.date}</p>
-                    <p className="mt-2 text-base font-semibold text-white">{exp.title}</p>
+                    <p className="mt-2 text-base font-semibold text-white">
+                      {exp.title}
+                    </p>
+                    {exp.description && (
+                      <p className="mt-2 text-sm text-white/70">
+                        {exp.description}
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 {/* Logo in Center */}
                 <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 p-1">
-                  <Image src={exp.logo} alt={`${exp.company} logo`} width={32} height={32} className="rounded-full" />
+                  <Image
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
                 </div>
 
                 <div className="w-1/2" />
@@ -86,15 +118,30 @@ const Timeline = () => {
 
                 {/* Logo in Center */}
                 <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center absolute left-1/2 transform -translate-x-1/2 p-1">
-                  <Image src={exp.logo} alt={`${exp.company} logo`} width={32} height={32} className="rounded-full" />
+                  <Image
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
                 </div>
 
                 {/* Right Side */}
                 <div className="w-1/2 flex justify-start pl-8">
                   <div className="p-2 w-fit max-w-sm text-left transition-transform hover:-translate-y-2 duration-300">
-                    <h3 className="text-lg font-medium text-white/90">{exp.company}</h3>
+                    <h3 className="text-lg font-medium text-white/90">
+                      {exp.company}
+                    </h3>
                     <p className="text-sm text-white/60">{exp.date}</p>
-                    <p className="mt-2 text-base font-semibold text-white">{exp.title}</p>
+                    <p className="mt-2 text-base font-semibold text-white">
+                      {exp.title}
+                    </p>
+                    {exp.description && (
+                      <p className="mt-2 text-sm text-white/70">
+                        {exp.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </>
