@@ -1,11 +1,12 @@
-import HeroSection from "@/app/components/hero";
-import Tesseract from "@/app/components/section-tesseract";
-import WorkExperience from "@/app/components/section-experience";
-import Mesh from "@/app/components/section-mesh";
-import Biography from "@/app/components/bio";
-import FooterSection from "@/app/components/footer";
-import Skills from "@/app/components/section-skills";
-import AnimationCursor from "@/app/components/animation-cursor";
+import HeroSection from "@/app/components/HeroSection";
+import Tesseract from "@/app/components/TesseractSection";
+import WorkExperience from "@/app/components/ExperienceSection";
+import Mesh from "@/app/components/MeshSection";
+import Biography from "@/app/components/BioSection";
+import FooterSection from "@/app/components/FooterSection";
+import Skills from "@/app/components/SkillsSection";
+
+import AnimationCursor from "@/app/components/CursorAnimation";
 
 export default function Home() {
   return (
