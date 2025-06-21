@@ -13,6 +13,7 @@
     "@react-three/fiber": "^9.0.4",
     "@react-three/postprocessing": "^3.0.4",
     "framer-motion": "^12.4.7",
+    "liquid-glass-react": "^1.1.1",
     "lucide-react": "^0.503.0",
     "next": "^15.2.0",
     "react": "^19.0.0",

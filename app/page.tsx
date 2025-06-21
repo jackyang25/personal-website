@@ -11,8 +11,10 @@ import AnimationCursor from "@/app/components/CursorAnimation";
 export default function Home() {
   return (
     <main>
-      <AnimationCursor />
-      <HeroSection />
+      <AnimationCursor targetSectionId="hero-section" />
+      <section id="hero-section">
+        <HeroSection />
+      </section>
       <Biography />
       <Tesseract />
       <WorkExperience />

@@ -4,6 +4,7 @@ import { Sphere } from "@react-three/drei";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import * as THREE from "three";
 
+// === Tesseract Component ===
 interface Ball {
   id: number;
   position: THREE.Vector3;
@@ -18,6 +19,7 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   const groupRef = useRef<THREE.Group>(null);
   const [balls, setBalls] = useState<Ball[]>(() => [createNewBall()]);
   const clickCooldown = useRef(false);
+  const isDesktop = typeof window !== "undefined" ? window.innerWidth >= 768 : true;
 
   function createNewBall(): Ball {
     return {
@@ -44,11 +46,9 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
     const numBallsToAdd = Math.floor(Math.random() * 4) + 1;
     setBalls((prevBalls) => {
       let newBalls = [...prevBalls, ...Array.from({ length: numBallsToAdd }, () => createNewBall())];
-
       if (newBalls.length > MAX_BALLS) {
         newBalls = newBalls.slice(newBalls.length - MAX_BALLS);
       }
-
       return newBalls;
     });
 
@@ -58,7 +58,7 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   }, []);
 
   useFrame(({ clock }) => {
-    if (!isVisible) return; // Pause animation if not visible
+    if (!isVisible) return;
 
     if (groupRef.current) {
       const t = clock.getElapsedTime() * 0.6;
@@ -84,7 +84,7 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   });
 
   useEffect(() => {
-    if (!isVisible) return; // Don't run if not visible
+    if (!isVisible) return;
 
     const interval = setInterval(() => {
       setBalls((prevBalls) => {
@@ -104,7 +104,6 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
     return () => clearInterval(interval);
   }, [isVisible]);
 
-  // === TRUE 4D TESSERACT PROJECTION ===
   const vertices = useMemo(() => {
     const size = 0.8;
     return [
@@ -132,7 +131,7 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   }, []);
 
   return (
-    <group ref={groupRef} onClick={addBalls}>
+    <group ref={groupRef} onClick={addBalls} scale={isDesktop ? 1.25 : 1}>
       {edges.map(([start, end], index) => {
         const geometry = new THREE.BufferGeometry().setFromPoints([vertices[start], vertices[end]]);
         return (
@@ -156,6 +155,7 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   );
 };
 
+// === Scroll3D Section ===
 const Scroll3D = () => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -166,19 +166,40 @@ const Scroll3D = () => {
     }, { threshold: 0.2 });
 
     if (ref.current) observer.observe(ref.current);
-
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={ref} className="h-screen bg-black flex items-center justify-center">
-      {isVisible && (
-        <Canvas>
-          <ambientLight intensity={0.2} />
-          <pointLight position={[5, 5, 5]} intensity={1.5} />
-          <Tesseract isVisible={isVisible} />
-        </Canvas>
-      )}
+    <section
+      ref={ref}
+      className="relative min-h-screen bg-black flex items-center justify-center px-8"
+    >
+      <div className="flex flex-col md:flex-row items-center md:space-x-8 space-y-8 md:space-y-0 max-w-6xl w-full md:ml-[-160px]">
+        {/* Tesseract */}
+        <div className="w-full md:w-2/3 h-[300px] md:h-[500px] relative">
+          {isVisible && (
+            <Canvas className="absolute inset-0">
+              <ambientLight intensity={0.2} />
+              <pointLight position={[5, 5, 5]} intensity={1.5} />
+              <Tesseract isVisible={isVisible} />
+            </Canvas>
+          )}
+        </div>
+
+        {/* Divider */}
+        <div className="hidden md:block text-gray-700 text-3xl select-none">|</div>
+
+        {/* Definition */}
+        <div className="w-full md:w-1/3 text-left text-gray-400 font-mono space-y-2">
+          <h3 className="text-2xl font-semibold tracking-tight text-white">
+            tesseract
+          </h3>
+          <p className="italic text-gray-500">/tĕs′ə-răkt″/</p>
+          <p className="text-sm leading-relaxed">
+            <span className="font-semibold text-white">(noun)</span> — (mathematics) The four-dimensional analogue of a cube; a 4D polytype bounded by eight cubes (in the same way a cube is bounded by six squares).
+          </p>
+        </div>
+      </div>
     </section>
   );
 };

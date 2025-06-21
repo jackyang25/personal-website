@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 type Particle = {
   x: number;
@@ -11,14 +11,19 @@ type Particle = {
   radius: number;
 };
 
-export default function AnimationCursor() {
+export default function AnimationCursor({
+  targetSectionId,
+}: {
+  targetSectionId: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particles = useRef<Particle[]>([]);
   const mouse = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current!;
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext("2d")!;
+    const section = document.getElementById(targetSectionId);
     let animationFrameId: number;
 
     function resizeCanvas() {
@@ -42,14 +47,28 @@ export default function AnimationCursor() {
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
 
-      mouse.current.x = (e.clientX - rect.left) * scaleX;
-      mouse.current.y = (e.clientY - rect.top) * scaleY;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
 
-      for (let i = 0; i < 5; i++) {
-        spawnParticle(
-          mouse.current.x + Math.random() * 10 - 5,
-          mouse.current.y + Math.random() * 10 - 5
-        );
+      mouse.current.x = mouseX;
+      mouse.current.y = mouseY;
+
+      // Only spawn if inside target section
+      if (section) {
+        const sectionRect = section.getBoundingClientRect();
+        if (
+          e.clientX >= sectionRect.left &&
+          e.clientX <= sectionRect.right &&
+          e.clientY >= sectionRect.top &&
+          e.clientY <= sectionRect.bottom
+        ) {
+          for (let i = 0; i < 5; i++) {
+            spawnParticle(
+              mouseX + Math.random() * 10 - 5,
+              mouseY + Math.random() * 10 - 5
+            );
+          }
+        }
       }
     }
 
@@ -82,23 +101,20 @@ export default function AnimationCursor() {
     }
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("mousemove", handleMouseMove);
     animate();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full z-[10] pointer-events-none">
-      <canvas
-        ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-      />
+    <div className="fixed top-0 left-0 w-screen h-screen z-[9999] pointer-events-none">
+      <canvas ref={canvasRef} className="w-full h-full pointer-events-none" />
     </div>
   );
 }
