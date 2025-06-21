@@ -37,7 +37,7 @@ const experiences = [
   },
   {
     title: "Fellow",
-    company: "IAC",
+    company: "InterActiveCorp (IAC)",
     date: "Jun 2023 - Aug 2023",
     logo: "/logos/iacwhite.png",
     description:

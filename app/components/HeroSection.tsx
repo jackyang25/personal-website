@@ -96,7 +96,7 @@ const HeroSection = () => {
         transition={{ delay: 0.5, duration: 0.6 }}
         className="text-lg text-gray-600 max-w-xl mt-3"
       >
-        Student • Software Engineer • New York
+        NYU Alumnus • Software Engineer • New York
       </motion.p>
 
       {/* Button Group */}
