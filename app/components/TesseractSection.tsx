@@ -119,33 +119,38 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
 
   const edges = useMemo(() => {
     return [
-      [0,1], [1,2], [2,3], [3,0], 
-      [4,5], [5,6], [6,7], [7,4], 
-      [0,4], [1,5], [2,6], [3,7], 
-      [8,9], [9,10], [10,11], [11,8], 
-      [12,13], [13,14], [14,15], [15,12], 
-      [8,12], [9,13], [10,14], [11,15], 
-      [0,8], [1,9], [2,10], [3,11], 
-      [4,12], [5,13], [6,14], [7,15]
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [0, 4], [1, 5], [2, 6], [3, 7],
+      [8, 9], [9, 10], [10, 11], [11, 8],
+      [12, 13], [13, 14], [14, 15], [15, 12],
+      [8, 12], [9, 13], [10, 14], [11, 15],
+      [0, 8], [1, 9], [2, 10], [3, 11],
+      [4, 12], [5, 13], [6, 14], [7, 15],
     ];
   }, []);
 
+  const lineMaterial = useMemo(() => (
+    new THREE.LineBasicMaterial({
+      color: "cyan",
+      linewidth: 2,
+      opacity: 0.9,
+      transparent: true,
+    })
+  ), []);
+
+  const lines = useMemo(() => {
+    return edges.map(([start, end]) => {
+      const geometry = new THREE.BufferGeometry().setFromPoints([vertices[start], vertices[end]]);
+      return new THREE.Line(geometry, lineMaterial);
+    });
+  }, [edges, vertices, lineMaterial]);
+
   return (
-    <group ref={groupRef} onClick={addBalls} scale={isDesktop ? 1.25 : 1}>
-      {edges.map(([start, end], index) => {
-        const geometry = new THREE.BufferGeometry().setFromPoints([vertices[start], vertices[end]]);
-        return (
-          <primitive 
-            key={index} 
-            object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ 
-              color: "cyan", 
-              linewidth: 2, 
-              opacity: .9, 
-              transparent: true 
-            }))} 
-          />
-        );
-      })}
+    <group ref={groupRef} onClick={addBalls} scale={isDesktop ? 1.25 : 1.5}>
+      {lines.map((line, index) => (
+        <primitive key={index} object={line} />
+      ))}
       {balls.map((ball) => (
         <Sphere key={ball.id} position={ball.position} args={[0.15, 32, 32]} scale={ball.scale}>
           <meshStandardMaterial emissive="cyan" emissiveIntensity={2} roughness={0.2} metalness={0.8} />
