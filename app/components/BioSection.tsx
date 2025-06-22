@@ -1,10 +1,11 @@
 "use client";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { motion, useMotionValue, animate, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
 const Biography = () => {
   const terminalCommand = "jack@website:~$ ./hello.sh";
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef(null);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -17,6 +18,14 @@ const Biography = () => {
     ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>",
     ">>> <span class='text-white'>I'm currently working as a software engineer at a startup and am working towards specializing in ML engineering via a GCP partnership program.</span>",
   ];
+
+  // Scroll-based opacity for the arrow
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ["start start", "end start"],
+  });
+
+  const arrowOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const snapBack = () => {
     animate(x, 0, { type: "spring", stiffness: 300, damping: 30 });
@@ -33,7 +42,10 @@ const Biography = () => {
   const TerminalWindow = isMobile ? "div" : motion.div;
 
   return (
-    <section className="biography-section relative z-0 min-h-screen flex flex-col justify-center items-center px-6 pb-24 bg-gradient-to-b from-gray-100 via-gray-200 to-black overflow-hidden">
+    <section
+      ref={scrollRef}
+      className="biography-section relative z-0 min-h-screen flex flex-col justify-center items-center px-6 pb-24 bg-gradient-to-b from-gray-100 via-gray-200 to-black overflow-hidden"
+    >
       <div
         ref={containerRef}
         className="relative w-full max-w-screen-xl h-screen px-4"
@@ -77,11 +89,9 @@ const Biography = () => {
         </TerminalWindow>
       </div>
 
-      {/* Scroll Arrow */}
+      {/* Scroll Arrow with fading effect */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        style={{ opacity: arrowOpacity }}
         className="absolute bottom-10 z-10 text-gray-500"
       >
         <motion.p

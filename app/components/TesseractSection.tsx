@@ -147,7 +147,7 @@ const Tesseract = ({ isVisible }: { isVisible: boolean }) => {
   }, [edges, vertices, lineMaterial]);
 
   return (
-    <group ref={groupRef} onClick={addBalls} scale={isDesktop ? 1.25 : 1.5}>
+    <group ref={groupRef} onClick={addBalls} scale={isDesktop ? 1.25 : 1.35}>
       {lines.map((line, index) => (
         <primitive key={index} object={line} />
       ))}
