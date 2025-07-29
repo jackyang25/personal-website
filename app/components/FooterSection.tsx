@@ -17,7 +17,7 @@ const FooterSection = () => {
       className="h-60 flex flex-col items-center justify-center text-center bg-gradient-to-b from-black to-gray-800 text-white relative overflow-hidden px-4"
     >
       <motion.div style={{ opacity }} className="w-full">
-        <h2 className="text-2xl font-semibold">Let's Connect</h2>
+        <h2 className="text-2xl font-semibold">Think, Build, Ship</h2>
         <p className="text-gray-400 mt-2">Feel free to reach out on any platform.</p>
         <div className="flex gap-6 mt-4 justify-center">
           <a
