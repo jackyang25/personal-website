@@ -5,9 +5,9 @@ import { ChevronRight, FileText, Mail, Github } from "lucide-react";
 
 const TypingEffect = () => {
   const messages = [
-    "You're in the right place.",
     "www.linkedin.com/in/jackyang25/",
     "Let's stay connected.",
+    "◡̈",
   ];
 
   const [displayedText, setDisplayedText] = useState("");
@@ -96,7 +96,7 @@ const HeroSection = () => {
         transition={{ delay: 0.5, duration: 0.6 }}
         className="text-lg text-gray-600 max-w-xl mt-3"
       >
-        Software Engineer • NYU Alumnus
+        Computer Science @ New York University
       </motion.p>
 
       {/* Button Group */}

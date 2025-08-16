@@ -9,7 +9,7 @@ const experiences = [
     date: "Apr 2025 – Present",
     logo: "/logos/pulp.svg",
     description:
-      "Currently working on full-stack development projects for agentic AI startup.",
+      "Currently working on full-stack development projects for agentic AI startup",
   },
   {
     title: "Software Engineering Intern",
@@ -17,7 +17,7 @@ const experiences = [
     date: "Jun 2024 – Aug 2024",
     logo: "/logos/angi.png",
     description:
-      "Worked on internal backend and frontend services, improving performance and building new APIs.",
+      "Deployed changes into production across multiple microservices, implementing project involving Angi’s content management system to serve dynamic content for landing pages in the services taxonomy",
   },
   {
     title: "Research Assistant",
@@ -25,7 +25,7 @@ const experiences = [
     date: "Aug 2023 - Jan 2024",
     logo: "/logos/nyu.png",
     description:
-      "Conducted research in natural language processing, focusing on classification tasks.",
+      "Conducted machine learning experiments in natural language processing, focusing on long short-term memory (LSTM) networks for sociopolitical classification",
   },
   {
     title: "Software Engineering Intern",
@@ -33,22 +33,22 @@ const experiences = [
     date: "Jun 2023 - Aug 2023",
     logo: "/logos/ddm.png",
     description:
-      "Built core web components for content articles and optimized user experience.",
+      "Improved the user experience of brands that receive over 200 million visits per month while contributing to product engineering and business intelligence R&D",
   },
   {
-    title: "Fellow",
+    title: "IAC Fellow",
     company: "InterActiveCorp (IAC)",
     date: "Jun 2023 - Aug 2023",
     logo: "/logos/iacwhite.png",
     description:
-      "Selected for a prestigious fellowship program; collaborated with multiple IAC brands.",
+      "Participated in selective career accelerator focused on professional networking, pitching, personal branding, mentorship, and individual and group workshops with members of the C-suite",
   },
   {
-    title: "Team Lead",
+    title: "Software Team Lead",
     company: "NYU Flexible AI-Enabled Mechatronic Systems Lab",
     date: "Jul 2022 - Jun 2023",
     logo: "/logos/fam.png",
-    description: "Led a team to develop AI-enabled robotic systems.",
+    description: "Developed embedded applications and computer vision algorithms for robots using OpenCV, NVIDIA Jetson, YOLO, and Linux",
   },
 ];
 

@@ -3,7 +3,7 @@ import { motion, useMotionValue, animate, useScroll, useTransform } from "framer
 import { useEffect, useState, useRef } from "react";
 
 const Biography = () => {
-  const terminalCommand = "jack@website:~$ ./hello.sh";
+  const terminalCommand = "user@thevoid:~$ ./note.sh";
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef(null);
 
@@ -13,10 +13,10 @@ const Biography = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const bioParagraphs = [
-    ">>> <span class='text-white'>Hey, welcome to my profile.</span> I live in NYC and I enjoy working out and meeting new people.",
-    ">>> <span class='text-white'>I recently graduated from New York University (Computer Science) and I'm interested in software engineering, agentic AI, and business.</span>",
-    ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>",
-    ">>> <span class='text-white'>I'm currently working as a software engineer at a startup and am working towards specializing in ML engineering.</span>",
+    ">>> <span class='text-white'>Hey, welcome to my portfolio.</span> I live in NYC and I enjoy traveling, working out, and meeting new people.",
+    ">>> <span class='text-white'>I graduated from New York University with my B.A. in Computer Science and I have experience in software engineering and AI.</span>",
+    ">>> <span class='text-white'>Some of my past projects are related to robotics, text-to-text models, and full-stack development.</span>",
+    ">>> <span class='text-white'>I'm currently working as a software engineer at a startup and am further working towards specializing in agentic engineering.</span>",
   ];
 
   // Scroll-based opacity for the arrow
@@ -69,7 +69,7 @@ const Biography = () => {
             <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
             <span className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
             <span className="w-3 h-3 bg-green-500 rounded-full mr-3"></span>
-            <p className="font-mono text-blue-400">jack@website:~$</p>
+            <p className="font-mono text-blue-400">user@thevoid:~$</p>
           </div>
 
           {/* Terminal Content */}

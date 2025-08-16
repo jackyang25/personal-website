@@ -12,11 +12,11 @@ const categories = [
   },
   {
     label: "Data Science",
-    skills: ["scikit-learn", "Pandas", "Matplotlib", "SQL", "BigQuery"],
+    skills: ["scikit-learn", "Pandas", "NumPy", "SQL", "BigQuery"],
   },
   {
-    label: "Systems",
-    skills: ["Git", "Linux", "Postman"],
+    label: "Other",
+    skills: ["Git", "Linux", "Postman", "Pinecone", "OpenMPI"],
   },
 ];
 
@@ -31,7 +31,7 @@ const Skills = () => {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        Skills
+        Stack
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl w-full">

@@ -18,7 +18,7 @@ const FooterSection = () => {
     >
       <motion.div style={{ opacity }} className="w-full">
         <h2 className="text-2xl font-semibold">Think, Build, Ship</h2>
-        <p className="text-gray-400 mt-2">Feel free to reach out on any platform.</p>
+        <p className="text-gray-400 mt-2">Feel free to reach out on any platform</p>
         <div className="flex gap-6 mt-4 justify-center">
           <a
             href="https://www.linkedin.com/in/jackyang25/"
