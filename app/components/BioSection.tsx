@@ -13,9 +13,9 @@ const Biography = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const bioParagraphs = [
-    ">>> <span class='text-white'>Hey, welcome to my profile.</span> I currently live in Manhattan and I enjoy working out, traveling, and meeting new people.",
-    ">>> <span class='text-white'>I graduated from New York University (Computer Science) in 2025. My interests include software engineering, business, and agentic systems.</span>",
-    ">>> <span class='text-white'>Morever, some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>",
+    ">>> <span class='text-white'>Hey, welcome to my profile.</span> I live in NYC and I enjoy working out and meeting new people.",
+    ">>> <span class='text-white'>I recently graduated from New York University (Computer Science) and I'm interested in software engineering, agentic AI, and business.</span>",
+    ">>> <span class='text-white'>Some of my past projects include work in robotics, text-to-text models, and full-stack development.</span>",
     ">>> <span class='text-white'>I'm currently working as a software engineer at a startup and am working towards specializing in ML engineering.</span>",
   ];
 
