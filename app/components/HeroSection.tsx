@@ -3,6 +3,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ChevronRight, FileText, Mail, Github } from "lucide-react";
 
+type LatestProjectBoxProps = {
+  title?: string;
+  subtitle?: string;
+  onClick?: () => void;
+  buttonLabel?: string;
+  buttonClass?: string; // <— declare the optional prop
+};
+
 const TypingEffect = () => {
   const messages = [
     "www.linkedin.com/in/jackyang25/",
@@ -49,12 +57,41 @@ const TypingEffect = () => {
 
   return (
     <div className="w-full flex justify-center">
-      <p className="text-2xl md:text-3xl lg:text-4xl text-gray-800 font-mono text-center inline-flex">
+      <p className="text-1xl md:text-1xl lg:text-2xl text-gray-800 font-mono text-center inline-flex opacity-80">
         {displayedText}
         <span className={`ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>
           |
         </span>
       </p>
+    </div>
+  );
+};
+
+// Non-clickable box, smaller width, left-justified, slightly smaller + opaque text
+const LatestProjectBox = ({
+  title = "Latest Project",
+  subtitle = "In the works (Agents).",
+  onClick = () => {},
+  buttonLabel = "View",
+  buttonClass = "bg-transparent border border-gray-400 text-gray-700", // default styling
+}: LatestProjectBoxProps) => {
+  return (
+    <div className="w-full max-w-md rounded-xl border border-gray-300 bg-transparent p-3 md:p-4">
+      <div className="flex items-center gap-3">
+        <div className="flex-1 text-left">
+          <p className="text-sm md:text-base font-semibold text-gray-900 opacity-90">{title}</p>
+          <p className="text-xs md:text-sm text-gray-600 mt-0.5 opacity-70">{subtitle}</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={() => { onClick(); }} // returns void now
+            className={`inline-flex items-center gap-2 rounded-md ${buttonClass} text-xs font-medium px-3 py-1 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200`}
+          >
+            {buttonLabel} <ChevronRight className="h-3 w-3" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -74,10 +111,7 @@ const HeroSection = () => {
       ref={ref}
       className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-white to-gray-100 relative overflow-hidden px-4"
     >
-      <motion.div
-        style={{ opacity }}
-        className="w-full flex justify-center mb-6"
-      >
+      <motion.div style={{ opacity }} className="w-full flex justify-center mb-6">
         <TypingEffect />
       </motion.div>
 
@@ -85,7 +119,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="text-5xl font-bold text-gray-900"
+        className="text-4xl font-bold text-gray-900"
       >
         Jack Yang
       </motion.h1>
@@ -94,10 +128,18 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
-        className="text-lg text-gray-600 max-w-xl mt-3"
+        className="text-1xl text-gray-600 max-w-xl mt-3 opacity-80"
       >
-        Computer Science @ New York University
+        Computer Science @ NYU
       </motion.p>
+
+      {/* New: outlined box with right-aligned button */}
+      <div className="mt-8 w-full flex justify-center px-4">
+        <LatestProjectBox
+          onClick={() => { window.location.href = "#latest-project"; }} // void
+          buttonClass="bg-transparent border border-gray-400 text-gray-700"
+        />
+      </div>
 
       {/* Button Group */}
       <div className="absolute bottom-24 px-4 w-full flex flex-row gap-6 items-center justify-center">

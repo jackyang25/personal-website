@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const categories = [
   {
-    label: "Languages",
+    label: "Programming Languages",
     skills: ["Python", "TypeScript", "JavaScript", "Kotlin", "C"],
   },
   {
