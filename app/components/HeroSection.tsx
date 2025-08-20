@@ -13,7 +13,7 @@ type LatestProjectBoxProps = {
 
 const TypingEffect = () => {
   const messages = [
-    "www.linkedin.com/in/jackyang25/",
+    "https://www.linkedin.com/in/jackyang25/",
     "Let's stay connected.",
     "◡̈",
   ];
@@ -55,10 +55,24 @@ const TypingEffect = () => {
     return () => clearInterval(cursorBlink);
   }, [index, step, messageIndex]);
 
+  const currentMessage = messages[messageIndex];
+  const isLink = currentMessage.startsWith("http");
+
   return (
     <div className="w-full flex justify-center">
       <p className="text-1xl md:text-1xl lg:text-2xl text-gray-800 font-mono text-center inline-flex opacity-80">
-        {displayedText}
+        {isLink ? (
+          <a
+            href={currentMessage}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-blue-600 transition"
+          >
+            {displayedText}
+          </a>
+        ) : (
+          displayedText
+        )}
         <span className={`ml-1 ${showCursor ? "opacity-100" : "opacity-0"}`}>
           |
         </span>
