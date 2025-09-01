@@ -84,7 +84,7 @@ const TypingEffect = () => {
 // Non-clickable box, smaller width, left-justified, slightly smaller + opaque text
 const LatestProjectBox = ({
   title = "Latest Project",
-  subtitle = "In the works (Agents).",
+  subtitle = "Spotify Song Popularity Feature Modeling.",
   onClick = () => {},
   buttonLabel = "View",
   buttonClass = "bg-transparent border border-gray-400 text-gray-700", // default styling
@@ -158,7 +158,7 @@ const HeroSection = () => {
       {/* Button Group */}
       <div className="absolute bottom-24 px-4 w-full flex flex-row gap-6 items-center justify-center">
         <a
-          href="#"
+          href="/Jack_Yang_Resume.pdf"
           className="w-16 h-16 rounded-xl flex items-center justify-center text-gray-800 text-lg bg-white hover:bg-gray-100 transition duration-200 shadow-md"
         >
           <FileText size={32} />
