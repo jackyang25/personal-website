@@ -14,7 +14,7 @@ const Biography = () => {
 
   const bioParagraphs = [
     ">>> <span class='text-white'>Hey, welcome to my portfolio.</span> I live in NYC and I enjoy traveling, working out, and programming.",
-    ">>> <span class='text-white'>I'm a student at New York University studying Computer Science and I have experience in software engineering and AI.</span>",
+    ">>> <span class='text-white'>I'm a Computer Science student from New York University and I have experience in software engineering and AI.</span>",
     ">>> <span class='text-white'>Some of my past projects are related to robotics, text-to-text models, and full-stack development.</span>",
     ">>> <span class='text-white'>I'm currently working as a software engineer at a startup and am further working towards specializing in agentic engineering.</span>",
   ];
